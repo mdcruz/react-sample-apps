@@ -1,0 +1,27 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.container.winterStyle {
+  background-color: #748fc5;
+}
+
+.container.summerStyle {
+  background-color: #eb7b13;
+}
+
+.iconLeft {
+  float: left;
+}
+
+.iconRight {
+  float: right;
+}
+
+.seasonText {
+  font-size: 5rem;
+}
