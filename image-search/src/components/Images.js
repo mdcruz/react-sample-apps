@@ -1,12 +1,13 @@
 import React from 'react';
-import faker from 'faker';
+import Gallery from 'react-photo-gallery';
 
-const Images = () => {
-  return (
-    <div className="column">
-      <img src={faker.image.avatar()} alt="avatar" />
-    </div>
-  );
+const Images = props => {
+  const newImages = props.images.map(image => {
+    const { small } = image.urls;
+    return { src: small, ...image };
+  });
+
+  return <Gallery photos={newImages} />;
 };
 
 export default Images;

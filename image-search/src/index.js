@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Search from './components/Search';
 import Images from './components/Images';
+import axios from './api/unsplash-api';
+class App extends Component {
+  state = { imageList: [] };
 
-const App = () => {
-  return (
-    <div className="ui container">
-      <div className="ui grid">
-        <Header title="ReactSplash" />
-        <Search />
-        <div className="five column row">
-          <Images />
-          <Images />
-          <Images />
-          <Images />
-          <Images />
+  onSearchSubmit = async searchTerm => {
+    const res = await axios.get('search/photos', {
+      params: { query: searchTerm }
+    });
+
+    this.setState({ imageList: res.data.results });
+  };
+
+  async componentDidMount() {
+    const res = await axios.get('photos?page=1');
+    this.setState({ imageList: res.data });
+  }
+
+  render() {
+    return (
+      <div className="ui container">
+        <div className="ui grid">
+          <Header title="ReactSplash" />
+          <Search onSubmit={this.onSearchSubmit} />
+          <Images images={this.state.imageList} />
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.querySelector('#root'));
