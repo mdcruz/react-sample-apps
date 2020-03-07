@@ -17,6 +17,7 @@ class Search extends Component {
           <input
             type="text"
             placeholder="Search free high-resolution photos"
+            data-testid="search-input"
             value={this.state.searchTerm}
             onChange={e => this.setState({ searchTerm: e.target.value })}
           />
