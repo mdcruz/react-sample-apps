@@ -14,7 +14,6 @@ describe('Image search', () => {
   });
 
   it('should return images when search term is valid', () => {
-    cy.visit('/');
     cy.get('@searchInput').type('pancakes {enter}');
     cy.get('@imageGallery')
       .should('be.visible')
@@ -27,10 +26,9 @@ describe('Image search', () => {
     cy.route('search/photos?query=mock+', '@unsplashData');
 
     cy.get('@searchInput').type('mock {enter}');
-    cy.get('@imageGallery').should(
-      'have.attr',
-      'description',
-      'This is a mock data'
-    );
+    cy.get('@imageGallery')
+      .should('be.visible')
+      .and('have.attr', 'description', 'This is a mock data')
+      .and('have.length', 10);
   });
 });
