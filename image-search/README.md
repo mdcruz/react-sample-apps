@@ -11,3 +11,7 @@ The app uses the unsplash API to get photos based on a search term. The first ti
 ## Running the app
 
 Run `npm start` and then visit `https://localhost:3000`
+
+## Running the Cypress tests
+
+On a separate tab, run `npm run cy:open` or `npm run cy:run`
