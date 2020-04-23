@@ -15,3 +15,7 @@ Run `npm start` and then visit `https://localhost:3000`
 ## Running the Cypress tests
 
 On a separate tab, run `npm run cy:open` or `npm run cy:run`
+
+## Applitools Sample tests
+
+This repo shows an example on how to use Applitools with Cypress. To run the tests where it's using Applitools, please export the APPLITOOLS_API_KEY first prior to running the tests.
