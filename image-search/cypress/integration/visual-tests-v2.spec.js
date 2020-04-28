@@ -4,7 +4,7 @@
 describe('Image search', () => {
   beforeEach(() => {
     cy.server();
-    cy.route('photos?page=2').as('defaultSearchResults');
+    cy.route('photos?page=1').as('defaultSearchResults');
 
     cy.visit('/').wait('@defaultSearchResults', {
       timeout: Cypress.config('defaultCommandTimeout'),
