@@ -8,7 +8,7 @@ class Search extends Component {
       <div className="one column row">
         <form
           className="ui form container icon input"
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             this.props.onSubmit(this.state.searchTerm);
           }}
@@ -19,7 +19,7 @@ class Search extends Component {
             placeholder="Search free high-resolution photos"
             data-testid="search-input"
             value={this.state.searchTerm}
-            onChange={e => this.setState({ searchTerm: e.target.value })}
+            onChange={(e) => this.setState({ searchTerm: e.target.value })}
           />
         </form>
       </div>
