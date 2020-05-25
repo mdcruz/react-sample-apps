@@ -39,15 +39,4 @@ describe('Image search', () => {
 
     cy.get('@imageGallery').should('be.visible').and('have.length', 10);
   });
-
-  it('should return mock data', () => {
-    cy.fixture('unsplash').as('unsplashData');
-    cy.route('search/photos?query=mock+', '@unsplashData');
-
-    cy.get('@searchInput').type('mock {enter}');
-    cy.get('@imageGallery')
-      .should('be.visible')
-      .and('have.attr', 'description', 'This is a mock data')
-      .and('have.length', 10);
-  });
 });

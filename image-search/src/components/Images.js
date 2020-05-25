@@ -3,7 +3,7 @@ import Gallery from 'react-photo-gallery';
 
 class Images extends Component {
   getImages() {
-    return this.props.images.map(image => {
+    return this.props.images.map((image) => {
       const { small } = image.urls;
       return { src: small, ...image };
     });

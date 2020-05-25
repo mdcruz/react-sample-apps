@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This is an example React app from Stephen Grider's [Modern React with Redux](https://www.udemy.com/course/react-redux/) udemy course.
 
 The app uses the unsplash API to get photos based on a search term. The first time the image list component renders, it will display the recent photos uploaded in unsplash. The images will then be updated when you type in a search term and click enter.
+In order to get images from unsplash API, the `REACT_APP_UNSPLASH_API_KEY` must be exported either on the terminal or by creating a `.env` file on the root folder.
 
 ## Running the app
 

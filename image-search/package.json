@@ -36,7 +36,7 @@
   "devDependencies": {
     "@applitools/eyes-cypress": "^3.9.21",
     "axios": "^0.19.2",
-    "cypress": "^4.1.0",
+    "cypress": "^4.6.0",
     "eslint-plugin-cypress": "^2.10.3",
     "react-photo-gallery": "^8.0.0"
   }
