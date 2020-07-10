@@ -5,7 +5,7 @@ class Images extends Component {
   getImages() {
     return this.props.images.map((image) => {
       const { small } = image.urls;
-      return { src: small, ...image };
+      return { src: small, ...image, width: 5000, height: 6000 };
     });
   }
 
