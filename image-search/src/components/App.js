@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Search from './Search';
 import Images from './Images';
+import Footer from './Footer';
 import axios from '../api/unsplash-api';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           <Header title="ReactSplash" />
           <Search onSubmit={this.onSearchSubmit} />
           <Images images={this.state.imageList} />
+          <Footer />
         </div>
       </div>
     );

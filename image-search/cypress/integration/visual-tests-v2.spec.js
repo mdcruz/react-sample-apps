@@ -12,19 +12,8 @@ describe('Image search', () => {
   });
 
   it('should look ok visually', () => {
-    cy.eyesOpen({
-      appName: 'ReactSplash',
-      batchName: 'Image search',
-      browser: [
-        { width: 1024, height: 768, name: 'chrome' },
-        { width: 1024, height: 768, name: 'safari' },
-        { deviceName: 'iPhone 5/SE' },
-        { deviceName: 'iPad' },
-      ],
-    });
-
+    cy.eyesOpen();
     cy.eyesCheckWindow();
-
     cy.eyesClose();
   });
 });

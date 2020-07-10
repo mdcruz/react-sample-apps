@@ -15,6 +15,7 @@ class Search extends Component {
         >
           <i className="search icon"></i>
           <input
+            style={{ backgroundColor: 'blue' }}
             type="text"
             placeholder="Search free high-resolution photos"
             data-testid="search-input"
