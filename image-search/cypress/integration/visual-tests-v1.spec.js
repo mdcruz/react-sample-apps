@@ -2,12 +2,10 @@
 
 describe('Image search', () => {
   beforeEach(() => {
-    cy.server();
-    cy.route('photos?page=1').as('defaultSearchResults');
+    cy.intercept('photos?page=1').as('defaultSearchResults');
 
-    cy.visit('/').wait('@defaultSearchResults', {
-      timeout: Cypress.config('defaultCommandTimeout'),
-    });
+    cy.visit('/');
+    cy.wait('@defaultSearchResults');
   });
 
   it('should have the correct values and styling', () => {

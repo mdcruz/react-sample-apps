@@ -1,14 +1,12 @@
 /// <reference types="@applitools/eyes-cypress" />
 /// <reference types="cypress" />
 
-describe('Image search', () => {
+describe.skip('Image search', () => {
   beforeEach(() => {
-    cy.server();
-    cy.route('photos?page=1').as('defaultSearchResults');
+    cy.intercept('photos?page=1').as('defaultSearchResults');
 
-    cy.visit('/').wait('@defaultSearchResults', {
-      timeout: Cypress.config('defaultCommandTimeout'),
-    });
+    cy.visit('/');
+    cy.wait('@defaultSearchResults');
   });
 
   it('should look ok visually', () => {

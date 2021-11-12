@@ -1,42 +1,29 @@
 /// <reference types="cypress" />
 
 describe('Image search', () => {
-  beforeEach(() => {
-    cy.server();
-    cy.route('photos?page=1').as('defaultSearchResults');
-
-    cy.visit('/').wait('@defaultSearchResults', {
-      timeout: Cypress.config('defaultCommandTimeout'),
-    });
-
-    cy.get('[data-testid="search-input"]').as('searchInput');
-    cy.get('[data-test-id="image-gallery"] img').as('imageGallery');
-  });
+  beforeEach(() => cy.visit('/'));
 
   it('should not return any images when search term is invalid', () => {
-    cy.route('search/photos?query=jehrjehrjehrjkerae+').as(
+    cy.intercept('search/photos?query=jehrjehrjehrjkerae+').as(
       'invalidSearchResults'
     );
 
-    cy.get('@searchInput')
-      .type('jehrjehrjehrjkerae {enter}')
-      .wait('@invalidSearchResults', {
-        timeout: Cypress.config('defaultCommandTimeout'),
-      })
-      .then(() => cy.contains('No content found').should('be.visible'));
-
-    cy.get('@imageGallery').should('not.be.visible');
+    cy.get('[data-testid="search-input"]').type('jehrjehrjehrjkerae {enter}');
+    cy.wait('@invalidSearchResults');
+    cy.contains('No content found');
+    cy.get('[data-test-id="image-gallery"] img').should('not.exist');
+    /* ==== Generated with Cypress Studio ==== */
+    cy.get('[data-testid=search-input]').clear();
+    cy.get('[data-testid=search-input]').type('2342343{enter}');
+    cy.get('.grid > :nth-child(3)').should('be.visible');
+    /* ==== End Cypress Studio ==== */
   });
 
   it('should return images when search term is valid', () => {
-    cy.route('search/photos?query=pancakes+').as('validSearchResults');
+    cy.intercept('search/photos?query=pancakes+').as('validSearchResults');
 
-    cy.get('@searchInput')
-      .type('pancakes {enter}')
-      .wait('@validSearchResults', {
-        timeout: Cypress.config('defaultCommandTimeout'),
-      });
-
-    cy.get('@imageGallery').should('be.visible').and('have.length', 10);
+    cy.get('[data-testid="search-input"]').type('pancakes {enter}')
+    cy.wait('@validSearchResults');
+    cy.get('[data-test-id="image-gallery"] img').should('be.visible').and('have.length', 10);
   });
 });

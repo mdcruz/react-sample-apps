@@ -2,16 +2,11 @@
 
 describe('Image search with Mock API', () => {
   it('should return mock data', () => {
-    cy.fixture('unsplash').as('unsplashData');
-    cy.server().route({
-      method: 'GET',
-      url: 'search/photos?query=mock+',
-      response: '@unsplashData',
-    });
-
+    cy.intercept('search/photos?query=mock+', { fixture: 'unsplash.json'}).as('mockData');
     cy.visit('/');
-
+    
     cy.get('[data-testid="search-input"]').type('mock {enter}');
+    cy.wait('@mockData');
     cy.get('[data-test-id="image-gallery"] img')
       .should('be.visible')
       .and('have.attr', 'description', 'This is a mock data')
@@ -19,19 +14,18 @@ describe('Image search with Mock API', () => {
   });
 
   it('should not display images when API does not return data', () => {
-    cy.server().route({
-      method: 'GET',
-      url: 'search/photos?query=tree+',
-      status: 200,
-      response: {
-        results: [],
-        total: 0,
-      },
-    });
+    cy.intercept('GET', 'search/photos?query=mock+', {
+      statusCode: 200, 
+      body: { 
+        results: [], total: 0
+      }
+    }).as('mockData');
 
     cy.visit('/');
 
-    cy.get('[data-testid="search-input"]').type('tree {enter}');
-    cy.get('[data-test-id="image-gallery"] img').should('not.be.visible');
+    cy.get('[data-testid="search-input"]').type('mock {enter}');
+    cy.wait('@mockData');
+    cy.get('[data-test-id="image-gallery"] img').should('not.exist');
+    cy.contains('No content found');
   });
 });
